@@ -104,3 +104,7 @@ x = 0
 for i in campdata['dates']:
     print(campdata['dates'][x],campdata['times'][x],campdata['days'][x],campdata['months'][x],campdata['years'][x])
     x = x+1
+
+############################################
+###############Send data to SQL#############
+############################################
