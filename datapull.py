@@ -109,4 +109,4 @@ for i in campdata['dates']:
 ###############Send data to SQL#############
 ############################################
 
-#Start here...
+#First, we need to clean up the data
