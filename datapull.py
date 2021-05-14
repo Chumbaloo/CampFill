@@ -97,8 +97,8 @@ get_formvals(url) #pull all possible form values
 ############################################
 ####Send post request and get fill times####
 ############################################
-y=0 #used for indexing year
-while y<2: #loop through every possible year (only doing first two for testing)
+y=4 #used for indexing year
+while y<5: #loop through every possible year (only doing first two for testing)
     m=0 #used for indexing month
     for month in months: #loop through every possible month
         params['selectmm'] = months[m] #set month parameter for form request
@@ -134,14 +134,29 @@ while y<2: #loop through every possible year (only doing first two for testing)
         m=m+1 #used for indexing the months
     y=y+1 #used for indexing the years
 
-#This loop prints out the data we pulled from the webpage
-x = 0
-for i in campdata['dates']:
-    print(campdata['dates'][x],campdata['times'][x],campdata['days'][x],campdata['months'][x],campdata['years'][x])
-    x = x+1
-
 ############################################
 ###############Send data to SQL#############
 ############################################
 
 #First, we need to clean up the data
+
+#build a list with all the indexes we want to delete (date is empty)
+index_deletions = []
+for record in enumerate(campdata['dates']):
+    if record[1] == '\xa0':
+        index_deletions.append(int(record[0]))
+
+#start from highest index first so indexes don't change as we delete from list
+index_deletions.reverse()
+
+for deletion in index_deletions:
+    del campdata['dates'][deletion]
+    del campdata['days'][deletion]
+    del campdata['times'][deletion]
+    del campdata['months'][deletion]
+    del campdata['years'][deletion]
+
+x = 0
+for i in campdata['dates']:
+    print(campdata['dates'][x],campdata['times'][x],campdata['days'][x],campdata['months'][x],campdata['years'][x])
+    x = x+1
