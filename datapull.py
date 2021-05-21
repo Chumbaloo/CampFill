@@ -97,8 +97,8 @@ get_formvals(url) #pull all possible form values
 ############################################
 ####Send post request and get fill times####
 ############################################
-y=4 #used for indexing year
-while y<5: #loop through every possible year (only doing first two for testing)
+y=0 #used for indexing year
+for year in years: #loop through every possible year (only doing first two for testing)
     m=0 #used for indexing month
     for month in months: #loop through every possible month
         params['selectmm'] = months[m] #set month parameter for form request
